@@ -1,47 +1,37 @@
-'use strict'
+let getUsers = fetch('https://reqres.in/api/users?per_page=12')
+  .then((e) => {
+    return e.json()
+  })
 
-let money = prompt("Ваш месячный доход?", "30000");
+  getUsers.then((result) => {
+    let allUsers = result.data
+    console.log(allUsers)
 
-while(isNaN(money)) {
-  alert('Не число');
-  money = prompt("Ваш месячный доход?", "30000");
-}
+    // Вывод всех фамилий пункт 2
+    console.log('---------------');
+    console.log('Пункт 2');
+    allUsers.forEach(item => {
+      console.log(item.last_name);
+    });
+    console.log('---------------');
 
-let amount = prompt("Во сколько обойдуться обязательные статьи расходов?", "10000");
+    // Вывод всех фамилий которые начинатся на F пункт 3
+    console.log('Пункт 3');
+    allUsers.forEach(item => {
+      if(item.last_name.startsWith('F') == true) {
+        console.log(item)
+      }
+    });
+    console.log('---------------');
 
-while(isNaN(amount)) {
-  alert('Не число');
-  amount = prompt("Во сколько обойдуться обязательные статьи расходов?", "10000");
-}
+    // Вывод имени и фамилии с помощью reduce пункт 4
+    console.log('Пункт 4');
+    let names = allUsers.reduce((a,b,i) => a += `${b.first_name} ${b.last_name}${i !== allUsers.length-1 ? ', ' : ''}`,''); 
+    console.log(`Наша база содержит данные следующих пользователей: ${names}`); 
 
-let extraMoney = prompt(`Перечислите возможный доход за ваши дополнительные работы?`, "5000");
-
-while(isNaN(extraMoney)) {
-  alert('Не число');
-  extraMoney = prompt(`Перечислите возможный доход за ваши дополнительные работы?`, "5000");
-}
-
-const expenses = String(prompt("Перечислите возможные расходы за рассчитываемый период через запятую", "Питание, проезд, одежда"));
-const purpose = Number(prompt("Сколько нужно накопить", "60000"));
-const deposit = confirm("Есть ли у вас вклад в банке?");
-const profit = String(prompt("Перечислите источники дополнительного дохода", "Фриланс"));
-
-const getAccumulatedIncome = function() {
-  return money - amount + extraMoney;
-}
-
-let accumulatedIncome = getAccumulatedIncome();
-
-const getTargetMonth = function() {
-  return Math.ceil(purpose / accumulatedIncome);
-}
-
-let budgetDay = Math.floor(accumulatedIncome / 30);
-
-console.log('Ваш бюджет на месяц с учетом ваших расходов составляет: ', getAccumulatedIncome());
-if(getTargetMonth() > 0) {
-  console.log(`Ваша цель накопить ${purpose} с учетом всех ваших расходов будет достигнута через`, getTargetMonth() + ' месяца');
-} else {
-  console.log('Цель не будет достигнута');
-}
-console.log('Дневной бюджет', budgetDay);
+    // Пункт 5
+    console.log('Пункт 5');
+    allUsers.forEach((item) => {
+      console.log(Object.keys(item))
+    })
+  })
