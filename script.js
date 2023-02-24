@@ -1,37 +1,36 @@
-let getUsers = fetch('https://reqres.in/api/users?per_page=12')
-  .then((e) => {
-    return e.json()
-  })
+function guessingGame() {
+  const randomNumber = Math.floor(Math.random() * 10) + 1;
+  const userGuess = prompt("Угадайте число от 1 до 10:");
 
-  getUsers.then((result) => {
-    let allUsers = result.data
-    console.log(allUsers)
+  if (userGuess === null) {
+    alert("Игра окончена.");
+    return;
+  }
 
-    // Вывод всех фамилий пункт 2
-    console.log('---------------');
-    console.log('Пункт 2');
-    allUsers.forEach(item => {
-      console.log(item.last_name);
-    });
-    console.log('---------------');
+  const guessNumber = parseInt(userGuess);
 
-    // Вывод всех фамилий которые начинатся на F пункт 3
-    console.log('Пункт 3');
-    allUsers.forEach(item => {
-      if(item.last_name.startsWith('F') == true) {
-        console.log(item)
-      }
-    });
-    console.log('---------------');
+  if (guessNumber === randomNumber) {
+    alert("Поздравляю, вы угадали!!!");
+    return;
+  } else if (guessNumber > randomNumber) {
+    const hint = "Загаданное число меньше.";
+    const shouldContinue = confirm(`${hint}. Вы хотите попробовать еще раз?`);
+    if (shouldContinue) {
+      guessingGame();
+    } else {
+      alert("Игра окончена.");
+      return;
+    }
+  } else {
+    const hint = "Загаданное число больше.";
+    const shouldContinue = confirm(`${hint}. Вы хотите попробовать еще раз?`);
+    if (shouldContinue) {
+      guessingGame();
+    } else {
+      alert("Игра окончена.");
+      return;
+    }
+  }
+}
 
-    // Вывод имени и фамилии с помощью reduce пункт 4
-    console.log('Пункт 4');
-    let names = allUsers.reduce((a,b,i) => a += `${b.first_name} ${b.last_name}${i !== allUsers.length-1 ? ', ' : ''}`,''); 
-    console.log(`Наша база содержит данные следующих пользователей: ${names}`); 
-
-    // Пункт 5
-    console.log('Пункт 5');
-    allUsers.forEach((item) => {
-      console.log(Object.keys(item))
-    })
-  })
+guessingGame();
