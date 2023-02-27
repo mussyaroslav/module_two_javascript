@@ -4,10 +4,65 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 <body>
-  
+  <section>
+    <div class="form__div">
+      <div class="form__top">
+        <div class="login__link">
+          <a href="#">Войти</a>
+        </div>
+        <div class="header__name">
+          <h1>Регистрация</h1>
+        </div>
+      </div>
+      <form>
+        <div class="form__input__div">
+          <div class="form__title">
+            <p>Email</p>
+          </div>
+          <div class="form__input__email">
+            <div>
+              <p class="zvezda">*</p>
+              <input id="email" type="email" class="email" placeholder="Введите email">
+            </div>
+            <p id="error-email" class="error-email"></p>
+          </div>
+        </div>
+        <div class="form__input__div">
+          <div class="form__title">
+            <p>Пароль</p>
+          </div>
+          <div class="form__input__email">
+            <div>
+              <p class="zvezda">*</p>
+              <input id="password" type="password" class="password" placeholder="Введите пароль">
+            </div>
+            <p id="error-password" class="error-password"></p>
+          </div>
+        </div>
+        <div class="cheackbox__div">
+          <div class="checkbox__main">
+            <div>
+              <p class="zvezda">*</p>
+              <input id="custom-checkbox" id="custom-checkbox" type="checkbox" class="custom-checkbox">
+              <label for="custom-checkbox"></label>
+              <p class="politic">Я согласен получать обновления на почту</p>
+            </div>
+            <p id="error-checkbox" class="error-checkbox"></p>
+          </div>
+        </div>
+        <div class="button__div">
+          <button id="btn" class="btn">Зарегистрироваться</button>
+        </div>
+      </form>
+    </div>
+  </section>
   <script src="./script.js"></script>
 </body>
 </html>
