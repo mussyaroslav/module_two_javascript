@@ -51,13 +51,13 @@ submit.addEventListener('click', (event) => {
     userData.password = passwordData;
   }
 
-  if (checkboxData == '') {
+  if (checkboxData == false) {
     errorCheckbox.innerHTML = 'Поле обязательно для заполнения';
   } else {
     errorCheckbox.innerHTML = '';
   }
 
-  if ((emailData != '' && validateEmail(emailData) != false) && (passwordData != '' && passwordData.length > 8)) {
+  if ((emailData != '' && validateEmail(emailData) != false) && (passwordData != '' && passwordData.length > 8) && (checkboxData == true)) {
     console.log(userData)
   }
 })
