@@ -21,7 +21,7 @@ password.addEventListener('input', (event) => {
 })
 
 checkbox.addEventListener('input', (event) => {
-  checkboxData = event.target.value;
+  checkboxData = event.target.checked;
 })
 
 function validateEmail(emailData) {    
