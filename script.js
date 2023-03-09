@@ -1,63 +1,48 @@
-let submit = document.querySelector('#btn');
-let email = document.querySelector('#email');
-let password = document.querySelector('#password');
-let checkbox = document.querySelector('#custom-checkbox');
+let book = document.querySelectorAll('.book');
+let adv = document.querySelector('.adv');
 
-let errorEmail = document.querySelector('#error-email');
-let errorPassoword = document.querySelector('#error-password');
-let errorCheckbox = document.querySelector('#error-checkbox');
+// удаление рекламы
+adv.remove();
 
-let emailData = '';
-let passwordData = '';
-let checkboxData = '';
-let userData = {};
+// Перемещение книги
+book[1].after(book[0]);
+book[3].before(book[2]);
+book[2].before(book[4]);
+book[5].after(book[2]);
 
-email.addEventListener('input', (event) => {
-  emailData = event.target.value;
-})
+// Замена фона
+document.body.style.backgroundImage = 'url(./image/you-dont-know-js.jpg)';
 
-password.addEventListener('input', (event) => {
-  passwordData = event.target.value;
-})
+// Исправление ошибки текста
+document.body.innerHTML = document.body.innerHTML.replace('Книга 3. this и Пропопипы Объектов', 'Книга 3. this и Прототипы Объектов');
 
-checkbox.addEventListener('input', (event) => {
-  checkboxData = event.target.checked;
-})
+// Правильный порядок во 2й книге
+const book2List = document.querySelector('.book:nth-of-type(2) ul');
+const book2Chapters = Array.from(book2List.children);
 
-function validateEmail(emailData) {    
-  const re =/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;    
-  return re.test(String(emailData).toLowerCase());
-}
+book2Chapters[1].after(book2Chapters[3]);
+book2Chapters[3].after(book2Chapters[6]);
+book2Chapters[4].before(book2Chapters[8]);
 
-submit.addEventListener('click', (event) => {
-  event.preventDefault();
+// Правильный порядок в 5й книге
+const book5List = document.querySelector('.book:nth-of-type(5) ul');
+const book5Chapters = Array.from(book5List.children);
 
-  if (emailData == '') {
-    errorEmail.innerHTML = 'Поле обязательно для заполнения';
-  } else if (validateEmail(emailData) == false) {
-    errorEmail.innerHTML = 'Email невалидный';
-  } else {
-    errorEmail.innerHTML = '';
-    userData.email = emailData;
-  }
+book5Chapters[1].after(book5Chapters[9]);
+book5Chapters[3].before(book5Chapters[4]);
+book5Chapters[6].after(book5Chapters[2]);
+book5Chapters[8].before(book5Chapters[5]);
+book5Chapters[3].after(book5Chapters[4]);
 
-  if (passwordData == '') {
-    errorPassoword.innerHTML = 'Поле обязательно для заполнения';
-  } else if (passwordData.length < 8) {
-    errorPassoword.innerHTML = 'Пароль должен содержать как минимум 8 символов';
-  }
-  else {
-    errorPassoword.innerHTML = '';
-    userData.password = passwordData;
-  }
+// Добавить новую главу в 6 книгу
+const book6List = document.querySelector('.book:nth-of-type(6) ul');
+const book6Chapters = Array.from(book6List.children);
 
-  if (checkboxData == false) {
-    errorCheckbox.innerHTML = 'Поле обязательно для заполнения';
-  } else {
-    errorCheckbox.innerHTML = '';
-  }
+// Создаем новый элемент списка глав
+const newChapter = document.createElement('li');
+newChapter.textContent = 'Глава 8: За пределами ES6';
 
-  if ((emailData != '' && validateEmail(emailData) != false) && (passwordData != '' && passwordData.length > 8) && (checkboxData == true)) {
-    console.log(userData)
-  }
-})
+// Добавляем новый элемент в конец списка глав в шестой книге
+book6List.insertAdjacentElement('beforeend', newChapter);
+
+// не получается ее переместить
